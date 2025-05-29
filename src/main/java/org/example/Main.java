@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.config.DBManager;
+import org.example.controller.BookController;
 import org.example.model.Book;
 import org.example.repository.BookRepository;
 
@@ -13,8 +14,9 @@ public class Main {
 //        Book book = new Book("hola", "hola", "hola", "hola", "hola", 3);
 //        System.out.println(book.describeBook());
 
-        BookRepository br = new BookRepository();
-        br.findAll();
+        BookRepository bookRepository = new BookRepository();
+        BookController bookController = new BookController(bookRepository);
+        bookController.findAllController();
 
     }
 }
