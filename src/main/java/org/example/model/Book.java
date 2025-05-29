@@ -69,20 +69,7 @@ public class Book {
         return id;
     }
 
-
-    public String printBook() {
-        return "Book{Title: '" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", summary='" + summary + '\'' +
-                ", genre='" + genre + '\'' +
-                ", isbn='" + isbn + '\'' +
-                ", id=" + id +
-                '}';
-
-//        "Title: Nombre\tAuthor: autor\tGenre: genre\"
-//        "Title: Nombre\tAuthor: autor\tGenre: genre\"
-//
-//        Título          Género          Autor isbn id
-//            Nom             Lit
+    public String describeBook() {
+        return  title + "\t" + author + "\t" + genre + "\t" + isbn + "\t" + id;
     }
 }
