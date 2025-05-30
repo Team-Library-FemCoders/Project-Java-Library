@@ -40,4 +40,28 @@ public class BookRepository {
         }
         return booksList;
     }
+
+    public void saveBook(Book book) {
+        String querySQLCreate = "INSERT INTO books (title, author, summary, genre, isbn) VALUES (?, ?, ?, ?, ?)";
+
+        try {
+            connection = DBManager.initConnection();
+            PreparedStatement statement = connection.prepareStatement(querySQLCreate);
+
+            statement.setString(1, book.getTitle());
+            statement.setString(2, book.getAuthor());
+            statement.setString(3, book.getSummary());
+            statement.setString(4, book.getGenre());
+            statement.setString(5, book.getIsbn());
+
+            statement.execute();
+
+            System.out.println("Book created");
+
+        } catch (SQLException exception) {
+            System.out.println(exception.getMessage());
+        } finally {
+            DBManager.closeConnection();
+        }
+    }
 }
