@@ -15,4 +15,10 @@ public class BookController {
     public List<Book> findAllController(){
         return this.bookRepository.findAll();
     }
+
+
+    public void saveBookController(Book book) {
+        bookRepository.saveBook(book);
+    }
 }
+

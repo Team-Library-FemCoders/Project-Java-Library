@@ -12,16 +12,18 @@ public class Main {
     public static void main(String[] args) {
 
 
-        Book book = new Book("hola", "hola", "hola", "hola", "hola", 3);
+        Book book = new Book("El último Catón", "Matilde Asensi", "Bajo el suelo de la Ciudad del Vaticano, la hermana Ottavia Salina, recibe el encargo de descifrar unas extrañas escarificaciones.", "Ficción", "9788408081715");
 //        System.out.println(book.describeBook());
 
         BookRepository bookRepository = new BookRepository();
         BookController bookController = new BookController(bookRepository);
-        bookController.findAllController();
+        //bookController.findAllController();
         BookView bookView= new BookView(bookController);
-        bookView.showOneBook(book);
+        //bookView.showOneBook(book);
 
+        bookView.saveBookView();
         bookView.showBooks();
+
 
 
     }
