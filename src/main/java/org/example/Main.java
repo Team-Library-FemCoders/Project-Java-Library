@@ -21,7 +21,7 @@ public class Main {
         BookView bookView= new BookView(bookController);
         //bookView.showOneBook(book);
 
-        bookRepository.saveBook(book);
+        bookView.saveBookView();
         bookView.showBooks();
 
 

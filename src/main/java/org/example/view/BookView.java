@@ -4,6 +4,7 @@ import org.example.controller.BookController;
 import org.example.model.Book;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class BookView {
 
@@ -31,8 +32,36 @@ public class BookView {
         for (Book book : bookList){
             this.showOneBook(book);
         }
-
     }
 
+    public Book generateBook() {
+        Scanner scanner = new Scanner(System.in);
 
+        System.out.println("Rellena la información del libro: ");
+        System.out.print("Título: ");
+        String title = scanner.nextLine();
+
+        System.out.print("Autoría: ");
+        String author = scanner.nextLine();
+
+        System.out.print("Sinopsis: ");
+        String summary = scanner.nextLine();
+
+        System.out.print("Género literario: ");
+        String genre = scanner.nextLine();
+
+        System.out.print("ISBN: ");
+        String isbn = scanner.nextLine();
+
+        Book book = new Book(title, author, summary, genre, isbn);
+
+        scanner.close();
+
+        return book;
+    }
+
+    public void saveBookView() {
+        Book book = generateBook();
+        bookController.saveBookController(book);
+    }
 }
