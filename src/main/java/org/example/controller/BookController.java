@@ -20,5 +20,10 @@ public class BookController {
     public void saveBookController(Book book) {
         bookRepository.saveBook(book);
     }
+
+    public void deleteBookController(int id) {
+        bookRepository.deleteBook(id);
+    }
+
 }
 
