@@ -20,12 +20,13 @@ public class Main {
         BookView bookView= new BookView(bookController);
         //bookView.showOneBook(book);
 
-        bookRepository.deleteBook(1);
+        bookView.deleteBookView();
 
         //bookView.saveBookView();
 
+        //bookView.formSelectBookId();
 
-        bookView.showBooks();
+        //bookView.showBooks();
 
 
 

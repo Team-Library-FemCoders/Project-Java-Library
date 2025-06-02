@@ -3,6 +3,8 @@ package org.example.view;
 import org.example.controller.BookController;
 import org.example.model.Book;
 
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -63,5 +65,67 @@ public class BookView {
     public void saveBookView() {
         Book book = generateBook();
         bookController.saveBookController(book);
+    }
+
+    public List<Integer> getIdList() {
+        List<Book> bookList = this.getBooks();
+        List<Integer> idList = new ArrayList<>();
+
+        for (Book book : bookList) {
+            idList.add(book.getId());
+        }
+
+        return idList;
+    }
+
+    private int formSelectBookId(Scanner scanner) {
+
+        int id = -1;
+        List<Integer> idList = this.getIdList();
+
+        while (true) {
+            try {
+                System.out.print("Write the book ID to select it: ");
+                id = scanner.nextInt();
+                scanner.nextLine();
+
+                if (idList.contains(id)) {
+                    return id;
+                } else {
+                    System.out.println("Id not found. Please enter a valid id.");
+                }
+
+            } catch (InputMismatchException exception) {
+                System.out.println("Invalid input. Please enter a whole number");
+                scanner.nextLine();
+            }
+        }
+    }
+
+    public void deleteBookView() {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            while (true) {
+                System.out.println("You are going to delete a book.");
+
+                int id = this.formSelectBookId(scanner);
+
+                System.out.println("Do you really want to delete this book (id: " + id + ")? (Y/N/Exit)");
+                Character answer = Character.toUpperCase(scanner.next().charAt(0));
+                scanner.nextLine();
+
+                if (answer == 'Y') {
+                    //scanner.close();
+                    bookController.deleteBookController(id);
+                    break;
+                } else if (answer == 'E') {
+                    //scanner.close();
+                    break;
+                }
+            }
+        } finally {
+            scanner.close();
+        }
     }
 }
