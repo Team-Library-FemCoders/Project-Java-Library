@@ -11,9 +11,9 @@ import java.util.Scanner;
 public class BookView {
 
     private final BookController bookController;
-//    public static final String WHITE_BOLD = "\033[1;37m";
-//    public static final String RESET = "\033[0m" ;
-
+    public static final String CYAN_BOLD = "\033[1;96;47m";
+    public static final String RESET = "\033[0m" ;
+    private String leftAlignment = "%s" + "\t | %-3s | %-50s | %-30s | %-15s | %-13s | %n";
     public BookView(BookController bookController ){
         this.bookController = bookController;
     }
@@ -23,14 +23,12 @@ public class BookView {
     }
 
     public void showOneBook(Book book){
-        String leftAlignment = "\t | %-3s | %-50s | %-30s | %-15s | %-13s | %n";
-        System.out.printf(leftAlignment,book.getId(), book.getTitle(), book.getAuthor(),book.getGenre(),book.getIsbn());
+        System.out.printf(this.leftAlignment, RESET, book.getId(), book.getTitle(), book.getAuthor(),book.getGenre(),book.getIsbn());
     }
 
     public void showBooks(){
         List<Book> bookList =this.getBooks();
-        String leftAlignment = "\t | %-3s | %-50s | %-30s | %-15s | %-13s | %n";
-        System.out.printf(leftAlignment,"Id", "Title", "Author", "Genre","Isbn");
+        System.out.printf(this.leftAlignment, CYAN_BOLD, "Id", "Title", "Author", "Genre","Isbn");
         for (Book book : bookList){
             this.showOneBook(book);
         }
@@ -80,16 +78,17 @@ public class BookView {
 
     private int formSelectBookId(Scanner scanner) {
 
-        int id = -1;
         List<Integer> idList = this.getIdList();
 
         while (true) {
             try {
-                System.out.print("Write the book ID to select it: ");
-                id = scanner.nextInt();
+                System.out.print("Write the book ID to select it or write 0 to exit: ");
+                int id = scanner.nextInt();
                 scanner.nextLine();
 
                 if (idList.contains(id)) {
+                    return id;
+                } else if (id == 0){
                     return id;
                 } else {
                     System.out.println("Id not found. Please enter a valid id.");
@@ -111,16 +110,18 @@ public class BookView {
 
                 int id = this.formSelectBookId(scanner);
 
+                if (id == 0) {
+                    break;
+                }
+
                 System.out.println("Do you really want to delete this book (id: " + id + ")? (Y/N/Exit)");
                 Character answer = Character.toUpperCase(scanner.next().charAt(0));
                 scanner.nextLine();
 
                 if (answer == 'Y') {
-                    //scanner.close();
                     bookController.deleteBookController(id);
                     break;
                 } else if (answer == 'E') {
-                    //scanner.close();
                     break;
                 }
             }
