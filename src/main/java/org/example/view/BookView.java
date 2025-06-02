@@ -86,9 +86,7 @@ public class BookView {
                 int id = scanner.nextInt();
                 scanner.nextLine();
 
-                if (idList.contains(id)) {
-                    return id;
-                } else if (id == 0){
+                if (idList.contains(id) || id == 0) {
                     return id;
                 } else {
                     System.out.println("Id not found. Please enter a valid id.");
