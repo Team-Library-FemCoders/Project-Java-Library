@@ -5,6 +5,10 @@ public class Book {
     private String author;
     private String summary;
     private String genre;
+
+    public Book() {
+    }
+
     private String isbn;
     private int id;
 
