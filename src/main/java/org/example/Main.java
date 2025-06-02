@@ -27,6 +27,14 @@ public class Main {
         //bookView.formSelectBookId();
 
         bookView.showBooks();
+        Book book1 =bookRepository.selectOneBook(1);
+        bookView.showOneBook(book1);
+
+        book1.setTitle("uuuuuu");
+        bookView.showBooks();
+
+        bookRepository.updateBook(book1);
+        bookView.showOneBook(book1);
 
 
 
