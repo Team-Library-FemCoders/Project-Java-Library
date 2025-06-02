@@ -16,7 +16,6 @@ public class BookController {
         return this.bookRepository.findAll();
     }
 
-
     public void saveBookController(Book book) {
         bookRepository.saveBook(book);
     }
@@ -25,5 +24,8 @@ public class BookController {
         bookRepository.deleteBook(id);
     }
 
+    public void updateBookController(Book book) {
+        bookRepository.updateBook(book);
+    }
 }
 
