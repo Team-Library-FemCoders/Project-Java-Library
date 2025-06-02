@@ -11,7 +11,6 @@ import org.example.view.BookView;
 public class Main {
     public static void main(String[] args) {
 
-
         Book book = new Book("El último Catón", "Matilde Asensi", "Bajo el suelo de la Ciudad del Vaticano, la hermana Ottavia Salina, recibe el encargo de descifrar unas extrañas escarificaciones.", "Ficción", "9788408081715");
 //        System.out.println(book.describeBook());
 
@@ -21,8 +20,14 @@ public class Main {
         BookView bookView= new BookView(bookController);
         //bookView.showOneBook(book);
 
-        bookView.saveBookView();
-        bookView.showBooks();
+        bookView.deleteBookView();
+
+        //bookView.saveBookView();
+
+        //bookView.formSelectBookId();
+
+        //bookView.showBooks();
+
 
 
 

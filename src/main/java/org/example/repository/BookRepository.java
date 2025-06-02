@@ -64,4 +64,25 @@ public class BookRepository {
             DBManager.closeConnection();
         }
     }
+
+    public void deleteBook(int id) {
+        String querySQLDelete = "DELETE FROM books WHERE id_book = ?";
+
+        try {
+            connection = DBManager.initConnection();
+            PreparedStatement statement = connection.prepareStatement(querySQLDelete);
+
+            statement.setInt(1, id);
+
+            statement.execute();
+
+            System.out.println("Book deleted");
+
+        } catch (SQLException exception) {
+            System.out.println(exception.getMessage());
+        } finally {
+            DBManager.closeConnection();
+        }
+    }
+
 }
