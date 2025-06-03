@@ -41,6 +41,34 @@ public class BookRepository {
         return booksList;
     }
 
+    public Book selectOneBookById(int id) {
+        Book book = new Book();
+        String querySQLSelectALl = "SELECT * FROM books WHERE id_book = ?";
+
+        try {
+            connection = DBManager.initConnection();
+            PreparedStatement statement = connection.prepareStatement(querySQLSelectALl);
+            statement.setInt(1, id);
+            ResultSet response = statement.executeQuery();
+
+            while(response.next()) {
+                int idNew = response.getInt("id_book");
+                String title = response.getString("title");
+                String author = response.getString("author");
+                String summary = response.getString("summary");
+                String genre = response.getString("genre");
+                String isbn = response.getString("isbn");
+
+                book = new Book(title, author, summary, genre, isbn, idNew);
+            }
+        } catch (SQLException exception) {
+            System.out.println(exception.getMessage());
+        } finally {
+            DBManager.closeConnection();
+        }
+        return book;
+    }
+
     public void saveBook(Book book) {
         String querySQLCreate = "INSERT INTO books (title, author, summary, genre, isbn) VALUES (?, ?, ?, ?, ?)";
 
@@ -83,34 +111,6 @@ public class BookRepository {
         } finally {
             DBManager.closeConnection();
         }
-    }
-
-    public Book selectOneBookById(int id) {
-        Book book = new Book();
-        String querySQLSelectALl = "SELECT * FROM books WHERE id_book = ?";
-
-        try {
-            connection = DBManager.initConnection();
-            PreparedStatement statement = connection.prepareStatement(querySQLSelectALl);
-            statement.setInt(1, id);
-            ResultSet response = statement.executeQuery();
-
-            while(response.next()) {
-                int idNew = response.getInt("id_book");
-                String title = response.getString("title");
-                String author = response.getString("author");
-                String summary = response.getString("summary");
-                String genre = response.getString("genre");
-                String isbn = response.getString("isbn");
-
-                book = new Book(title, author, summary, genre, isbn, idNew);
-            }
-        } catch (SQLException exception) {
-            System.out.println(exception.getMessage());
-        } finally {
-            DBManager.closeConnection();
-        }
-            return book;
     }
 
     public void updateBook (Book book){
