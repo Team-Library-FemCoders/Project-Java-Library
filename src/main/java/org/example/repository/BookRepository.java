@@ -85,7 +85,7 @@ public class BookRepository {
         }
     }
 
-    public Book selectOneBook (int id) {
+    public Book selectOneBookById(int id) {
         Book book = new Book();
         String querySQLSelectALl = "SELECT * FROM books WHERE id_book = ?";
 

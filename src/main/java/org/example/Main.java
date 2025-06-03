@@ -1,6 +1,5 @@
 package org.example;
 
-import org.example.config.DBManager;
 import org.example.controller.BookController;
 import org.example.model.Book;
 import org.example.repository.BookRepository;
@@ -27,7 +26,7 @@ public class Main {
         //bookView.formSelectBookId();
 
         bookView.showBooks();
-        Book book1 =bookRepository.selectOneBook(1);
+        Book book1 =bookRepository.selectOneBookById(1);
         bookView.showOneBook(book1);
 
         book1.setTitle("uuuuuu");

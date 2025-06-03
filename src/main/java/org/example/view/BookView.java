@@ -127,4 +127,11 @@ public class BookView {
             scanner.close();
         }
     }
+    //selecionar libro que quieres actualizar
+
+
+    //mostrar los valores anteriores que quieres cambiar
+    //recoger los valores actualizados nuevos que quiere poner el usaurio
+    //con dichos valores actualizadosy los valores sueltos hay que crear libro de java, O1. ACTUALIZAR O O2 CREAR
+    //enviar a la bbdd
 }
