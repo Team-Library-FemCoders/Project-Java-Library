@@ -127,4 +127,59 @@ public class BookView {
             scanner.close();
         }
     }
+
+    public Book selectOneBookView () {
+        Scanner scanner = new Scanner(System.in);
+        int id = this.formSelectBookId(scanner);
+        return bookController.selectOneBookByIdController(id);
+    }
+
+    public String askAttribute (String formerValue, int maxLength, String attributeName, Scanner scanner) {
+
+        while (true) {
+            System.out.printf("Current %s: %s %n", attributeName, formerValue);
+            System.out.printf("New %s (Leave empty for no change)(Max %s characters): %n", attributeName, maxLength);
+            String input = scanner.nextLine().trim();
+            if (input.isEmpty()) {
+                return formerValue;
+            } else {
+                if (input.length() > maxLength){
+                    System.out.println("Too many characters. Remove: " + (input.length() - maxLength)+ " characters.");
+                    continue;
+                }
+                return input;
+            }
+        }
+    }
+
+    public Book updateBook (Book book) {
+        Scanner scanner = new Scanner(System.in);
+        String oldTitle = book.getTitle();
+        String newTitle = this.askAttribute(oldTitle,100, "title", scanner);
+        book.setTitle(newTitle);
+
+        String oldAuthor = book.getAuthor();
+        String newAuthor = this.askAttribute(oldAuthor,100, "Author", scanner);
+        book.setAuthor(newAuthor);
+
+        String oldSummary = book.getSummary();
+        String newSummary = this.askAttribute(oldSummary,200, "Summary", scanner);
+        book.setSummary(newSummary);
+
+        String oldGenre = book.getGenre();
+        String newGenre = this.askAttribute(oldGenre,50, "Genre", scanner);
+        book.setGenre(newGenre);
+
+        String oldIsbn = book.getIsbn();
+        String newIsbn = this.askAttribute(oldIsbn,13, "Isbn", scanner);
+        book.setIsbn(newIsbn);
+
+        return book;
+    }
+
+    public void updateBookView () {
+        Book previousBook = this.selectOneBookView();
+        Book updatedBook = this.updateBook(previousBook);
+        bookController.updateBookController(updatedBook);
+    }
 }

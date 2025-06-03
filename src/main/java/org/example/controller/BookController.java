@@ -27,5 +27,7 @@ public class BookController {
     public void updateBookController(Book book) {
         bookRepository.updateBook(book);
     }
+
+    public Book selectOneBookByIdController(int id) { return bookRepository.selectOneBookById(id);}
 }
 
