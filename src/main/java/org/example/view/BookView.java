@@ -12,29 +12,44 @@ public class BookView {
 
     private final BookController bookController;
     public static final String BLUE_WHITE_BG = "\033[1;34;107m";
+    public static final String CYAN = "\033[1;96m";
+    public static final String RED = "\033[1;91m";
+    public static final String GREEN = "\033[1;92m";
     public static final String RESET = "\033[0m" ;
     private String leftAlignment = "%s" + "\t | %-3s | %-50s | %-30s | %-15s | %-13s | %n";
-    public BookView(BookController bookController ){
+    public BookView(BookController bookController) {
         this.bookController = bookController;
     }
 
-    public List<Book> getBooks(){
+    //Read
+    private List<Book> getBooks() {
         return bookController.findAllController();
     }
 
-    public void showOneBook(Book book){
+    private void showOneBookInList(Book book) {
         System.out.printf(this.leftAlignment, RESET, book.getId(), book.getTitle(), book.getAuthor(),book.getGenre(),book.getIsbn());
     }
 
-    public void showBooks(){
-        List<Book> bookList =this.getBooks();
+    public void showAllBooksListView() {
+        List<Book> bookList = this.getBooks();
         System.out.printf(this.leftAlignment, BLUE_WHITE_BG, "Id", "Title", "Author", "Genre","Isbn");
-        for (Book book : bookList){
-            this.showOneBook(book);
+        for (Book book : bookList) {
+            this.showOneBookInList(book);
         }
     }
 
-    public Book generateBook() {
+    public void showOneBookView() {
+        Book book = this.getOneBookById();
+        System.out.printf(CYAN, "Id: %s%n" +
+                "Title: %s%n" +
+                "Author: %s%n" +
+                "Summary: %s%n" +
+                "Genre: %s%n" +
+                "ISBN: %s%n", book.getId(), book.getTitle(), book.getAuthor(), book.getSummary(), book.getGenre(),book.getIsbn());
+    }
+
+    //Create
+    private Book generateBook() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Rellena la información del libro: ");
@@ -55,17 +70,84 @@ public class BookView {
 
         Book book = new Book(title, author, summary, genre, isbn);
 
-        scanner.close();
+        //scanner.close();
 
         return book;
     }
 
-    public void saveBookView() {
+    public void createAndSaveBookView() {
         Book book = generateBook();
         bookController.saveBookController(book);
+        System.out.println(GREEN + "Book saved");
     }
 
-    public List<Integer> getIdList() {
+    //Delete
+    public void deleteBookView() {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            while (true) {
+                System.out.println("You are going to delete a book.");
+
+                int id = this.askBookId(scanner);
+
+                if (id == 0) {
+                    break;
+                }
+
+                Book book = bookController.selectOneBookByIdController(id);
+                System.out.printf(this.leftAlignment, RED, book.getId(), book.getTitle(), book.getAuthor(),book.getGenre(),book.getIsbn());
+
+                System.out.println(RESET + "Do you really want to delete this book (id: " + id + ")? (Y/N/Exit)");
+                Character answer = Character.toUpperCase(scanner.next().charAt(0));
+                scanner.nextLine();
+
+                if (answer == 'Y') {
+                    bookController.deleteBookController(id);
+                    break;
+                } else if (answer == 'E') {
+                    break;
+                }
+            }
+        } catch (Exception exception){
+            System.out.println(exception.getMessage());
+        }
+    }
+
+    //Update
+    private Book updateBookInstance(Book book) {
+        Scanner scanner = new Scanner(System.in);
+        String oldTitle = book.getTitle();
+        String newTitle = this.askAttributeToUpdate(oldTitle,100, "title", scanner);
+        book.setTitle(newTitle);
+
+        String oldAuthor = book.getAuthor();
+        String newAuthor = this.askAttributeToUpdate(oldAuthor,100, "Author", scanner);
+        book.setAuthor(newAuthor);
+
+        String oldSummary = book.getSummary();
+        String newSummary = this.askAttributeToUpdate(oldSummary,200, "Summary", scanner);
+        book.setSummary(newSummary);
+
+        String oldGenre = book.getGenre();
+        String newGenre = this.askAttributeToUpdate(oldGenre,50, "Genre", scanner);
+        book.setGenre(newGenre);
+
+        String oldIsbn = book.getIsbn();
+        String newIsbn = this.askAttributeToUpdate(oldIsbn,13, "Isbn", scanner);
+        book.setIsbn(newIsbn);
+
+        return book;
+    }
+
+    public void updateAndSaveBookView() {
+        Book previousBook = this.getOneBookById();
+        Book updatedBook = this.updateBookInstance(previousBook);
+        bookController.updateBookController(updatedBook);
+    }
+
+    //Helpers
+    private List<Integer> getIdList() {
         List<Book> bookList = this.getBooks();
         List<Integer> idList = new ArrayList<>();
 
@@ -76,7 +158,13 @@ public class BookView {
         return idList;
     }
 
-    private int formSelectBookId(Scanner scanner) {
+    private Book getOneBookById() {
+        Scanner scanner = new Scanner(System.in);
+        int id = this.askBookId(scanner);
+        return bookController.selectOneBookByIdController(id);
+    }
+
+    private int askBookId(Scanner scanner) {
 
         List<Integer> idList = this.getIdList();
 
@@ -99,42 +187,7 @@ public class BookView {
         }
     }
 
-    public void deleteBookView() {
-        Scanner scanner = new Scanner(System.in);
-
-        try {
-            while (true) {
-                System.out.println("You are going to delete a book.");
-
-                int id = this.formSelectBookId(scanner);
-
-                if (id == 0) {
-                    break;
-                }
-
-                System.out.println("Do you really want to delete this book (id: " + id + ")? (Y/N/Exit)");
-                Character answer = Character.toUpperCase(scanner.next().charAt(0));
-                scanner.nextLine();
-
-                if (answer == 'Y') {
-                    bookController.deleteBookController(id);
-                    break;
-                } else if (answer == 'E') {
-                    break;
-                }
-            }
-        } finally {
-            scanner.close();
-        }
-    }
-
-    public Book selectOneBookView () {
-        Scanner scanner = new Scanner(System.in);
-        int id = this.formSelectBookId(scanner);
-        return bookController.selectOneBookByIdController(id);
-    }
-
-    public String askAttribute (String formerValue, int maxLength, String attributeName, Scanner scanner) {
+    private String askAttributeToUpdate(String formerValue, int maxLength, String attributeName, Scanner scanner) {
 
         while (true) {
             System.out.printf("Current %s: %s %n", attributeName, formerValue);
@@ -150,36 +203,5 @@ public class BookView {
                 return input;
             }
         }
-    }
-
-    public Book updateBook (Book book) {
-        Scanner scanner = new Scanner(System.in);
-        String oldTitle = book.getTitle();
-        String newTitle = this.askAttribute(oldTitle,100, "title", scanner);
-        book.setTitle(newTitle);
-
-        String oldAuthor = book.getAuthor();
-        String newAuthor = this.askAttribute(oldAuthor,100, "Author", scanner);
-        book.setAuthor(newAuthor);
-
-        String oldSummary = book.getSummary();
-        String newSummary = this.askAttribute(oldSummary,200, "Summary", scanner);
-        book.setSummary(newSummary);
-
-        String oldGenre = book.getGenre();
-        String newGenre = this.askAttribute(oldGenre,50, "Genre", scanner);
-        book.setGenre(newGenre);
-
-        String oldIsbn = book.getIsbn();
-        String newIsbn = this.askAttribute(oldIsbn,13, "Isbn", scanner);
-        book.setIsbn(newIsbn);
-
-        return book;
-    }
-
-    public void updateBookView () {
-        Book previousBook = this.selectOneBookView();
-        Book updatedBook = this.updateBook(previousBook);
-        bookController.updateBookController(updatedBook);
     }
 }

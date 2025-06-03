@@ -7,13 +7,19 @@ import org.example.view.BookView;
 import java.util.Scanner;
 
 public class App {
+    public static final String CYAN = "\033[1;96m";
+    public static final String RED = "\033[1;91m";
+    public static final String GREEN = "\033[1;92m";
+    public static final String RESET = "\033[0m" ;
+
     private String greetingMessage = "Welcome to the library";
     private String options = "Options:\n" +
             "1. Show book list\n" +
-            "2. Add one book\n" +
-            "3. Delete one book\n" +
-            "4. Modify one book\n" +
-            "5. Exit options menu\n" +
+            "2. Show one book by Id\n" +
+            "3. Add one book\n" +
+            "4. Delete one book\n" +
+            "5. Modify one book\n" +
+            "6. Exit options menu\n" +
             "Select one number (eg 1): ";
 
     private BookRepository bookRepository;
@@ -36,18 +42,21 @@ public class App {
             scanner.nextLine();
             switch (chosenOption) {
                 case "1":
-                    bookView.showBooks();
+                    bookView.showAllBooksListView();
                     break;
                 case "2":
-                    bookView.saveBookView();
+                    bookView.showOneBookView();
                     break;
                 case "3":
-                    bookView.deleteBookView();
+                    bookView.createAndSaveBookView();
                     break;
                 case "4":
-                    bookView.updateBookView();
+                    bookView.deleteBookView();
                     break;
                 case "5":
+                    bookView.updateAndSaveBookView();
+                    break;
+                case "6":
                     insideLoop = false;
                     break;
                 default:
