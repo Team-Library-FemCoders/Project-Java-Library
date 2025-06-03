@@ -28,8 +28,6 @@ public class BookController {
         bookRepository.updateBook(book);
     }
 
-    public Book selectOneBookByIdController (int id) { return bookRepository.selectOneBookById(id);}
-
-
+    public Book selectOneBookByIdController(int id) { return bookRepository.selectOneBookById(id);}
 }
 

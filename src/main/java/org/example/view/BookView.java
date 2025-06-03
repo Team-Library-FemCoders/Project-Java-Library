@@ -127,16 +127,13 @@ public class BookView {
             scanner.close();
         }
     }
-    //selecionar libro que quieres actualizar
+
     public Book selectOneBookView () {
         Scanner scanner = new Scanner(System.in);
         int id = this.formSelectBookId(scanner);
         return bookController.selectOneBookByIdController(id);
     }
 
-    //mostrar los valores anteriores que quieres cambiar
-    //recoger los valores actualizados nuevos que quiere poner el usaurio
-    // 1) book.getTitle() 2) maxLength  3) attributeName 4) Scanner
     public String askAttribute (String formerValue, int maxLength, String attributeName, Scanner scanner) {
 
         while (true) {
@@ -154,7 +151,7 @@ public class BookView {
             }
         }
     }
-    //con dichos valores actualizadosy los valores sueltos hay que crear libro de java, Op-1. ACTUALIZAR noo Op-2 CREAR
+
     public Book updateBook (Book book) {
         Scanner scanner = new Scanner(System.in);
         String oldTitle = book.getTitle();
@@ -179,11 +176,6 @@ public class BookView {
 
         return book;
     }
-
-    //enviar a la bbdd//
-    //primero preguntamos el id que queremos actualizar y entonces obtenemos el id que queremos actualizar
-    //actualizar el libro viejo de java
-    //enviar a la base de datos
 
     public void updateBookView () {
         Book previousBook = this.selectOneBookView();
