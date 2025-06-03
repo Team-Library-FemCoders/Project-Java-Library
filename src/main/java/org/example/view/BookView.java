@@ -128,10 +128,53 @@ public class BookView {
         }
     }
     //selecionar libro que quieres actualizar
-
+    public Book retunrOneBook () {
+        Scanner scanner = new Scanner(System.in);
+        int id = this.formSelectBookId(scanner);
+        return bookController.selectOneBookByIdController(id);
+    }
 
     //mostrar los valores anteriores que quieres cambiar
     //recoger los valores actualizados nuevos que quiere poner el usaurio
+    // 1) book.getTitle() 2) maxLength  3) attributeName 4) Scanner
+    // Base function
+//    private String askTitle (Book book, Scanner scanner ) {
+//        while (true) {
+//            System.out.print("Current title: " + book.getTitle());
+//            System.out.print("New title (Leave empty for no change): ");
+//            String input = scanner.nextLine().trim();
+//            if (input.isEmpty() ) {
+//                return book.getTitle();
+//            } else {
+//                if (input.length()>100){
+//                    System.out.println("Too many characters!! Remove: " + (input.length()-100)+ "characters.");
+//                    continue;
+//                }
+//                return input;
+//            }
+//        }
+//    }
+
+    // 1) book.getTitle() 2) maxLength  3) attributeName 4) Scanner
+    public String askAttribute (String formerValue, int maxLength, String attributeName, Scanner scanner) {
+
+        while (true) {
+            System.out.printf("Current %s: %s %n", attributeName, formerValue);
+            System.out.printf("New %s (Leave empty for no change)(Max %s characters): %n", attributeName, maxLength);
+            String input = scanner.nextLine().trim();
+            if (input.isEmpty()) {
+                return formerValue;
+            } else {
+                if (input.length() > maxLength){
+                    System.out.println("Too many characters. Remove: " + (input.length() - maxLength)+ " characters.");
+                    continue;
+                }
+                return input;
+            }
+        }
+    }
+
+
     //con dichos valores actualizadosy los valores sueltos hay que crear libro de java, O1. ACTUALIZAR O O2 CREAR
     //enviar a la bbdd
 }

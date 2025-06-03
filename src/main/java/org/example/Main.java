@@ -5,6 +5,8 @@ import org.example.model.Book;
 import org.example.repository.BookRepository;
 import org.example.view.BookView;
 
+import java.util.Scanner;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -25,16 +27,19 @@ public class Main {
 
         //bookView.formSelectBookId();
 
-        bookView.showBooks();
-        Book book1 =bookRepository.selectOneBookById(1);
-        bookView.showOneBook(book1);
+//        bookView.showBooks();
+//        Book book1 =bookRepository.selectOneBookById(1);
+//        bookView.showOneBook(book1);
+//
+//        book1.setTitle("uuuuuu");
+//        bookView.showBooks();
+//
+//        bookRepository.updateBook(book1);
+//        bookView.showOneBook(book1);
 
-        book1.setTitle("uuuuuu");
-        bookView.showBooks();
-
-        bookRepository.updateBook(book1);
-        bookView.showOneBook(book1);
-
+        Scanner scanner = new Scanner(System.in);
+        String resulte = bookView.askAttribute("bubu",10,"title",scanner);
+        System.out.println(resulte);
 
 
 
