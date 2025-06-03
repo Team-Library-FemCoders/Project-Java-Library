@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class BookView {
 
     private final BookController bookController;
-    public static final String CYAN_BOLD = "\033[1;96;47m";
+    public static final String BLUE_WHITE_BG = "\033[1;34;107m";
     public static final String RESET = "\033[0m" ;
     private String leftAlignment = "%s" + "\t | %-3s | %-50s | %-30s | %-15s | %-13s | %n";
     public BookView(BookController bookController ){
@@ -28,7 +28,7 @@ public class BookView {
 
     public void showBooks(){
         List<Book> bookList =this.getBooks();
-        System.out.printf(this.leftAlignment, CYAN_BOLD, "Id", "Title", "Author", "Genre","Isbn");
+        System.out.printf(this.leftAlignment, BLUE_WHITE_BG, "Id", "Title", "Author", "Genre","Isbn");
         for (Book book : bookList){
             this.showOneBook(book);
         }
