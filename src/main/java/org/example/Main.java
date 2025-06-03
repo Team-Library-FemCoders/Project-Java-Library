@@ -37,10 +37,11 @@ public class Main {
 //        bookRepository.updateBook(book1);
 //        bookView.showOneBook(book1);
 
-        Scanner scanner = new Scanner(System.in);
-        String resulte = bookView.askAttribute("bubu",10,"title",scanner);
-        System.out.println(resulte);
+//        Scanner scanner = new Scanner(System.in);
+//        String resulte = bookView.askAttribute("bubu",10,"title",scanner);
+//        System.out.println(resulte);
 
+        bookView.updateBookView();
 
 
     }
