@@ -13,32 +13,34 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-//@ExtendWith(MockitoExtension.class)
-//public class BookControllerTest {
-//
-//
-//    @Mock
-//    private BookRepository bookRepository;
-//
-//    @InjectMocks
-//    private BookController bookController;
-//
-//    @Test
-//    void saveBookController_shouldCallRepository(){
-//
-//
-//        Book book = new Book("aaa", "bbb", "ccc", "dddd", "eee");
-//        bookController.saveBookController(book);
-//
-//        verify(bookRepository, times(1)).saveBook(book);
-//    }
-//
-//}
+@ExtendWith(MockitoExtension.class)
 public class BookControllerTest {
+
+    @Mock
+    private BookRepository bookRepository;
+
+    @InjectMocks
+    private BookController bookController;
+
     @Test
-    void test(){
-        int num = 2;
-        int result = num + num;
-        assertEquals(4, result);
+    void saveBookController_callsRepository() {
+        // Arrange
+        Book book = new Book("aaa", "bbb", "ccc", "dddd", "eee");
+
+        // Act
+        bookController.saveBookController(book);
+
+        // Assert
+        verify(bookRepository, times(1)).saveBook(book);
+    }
+
+    @Test
+    void deleteBookController_callsRepository() {
+        // 1. Define a sample ID
+        int sampleId = 1;
+        // 2. Call the method under test
+        bookController.deleteBookController(sampleId);
+        // 3. Verify that bookRepository.deleteBook() was called exactly once with the sampleId
+        verify(bookRepository, times(1)).deleteBook(sampleId);
     }
 }
