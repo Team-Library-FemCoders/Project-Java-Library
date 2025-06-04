@@ -12,15 +12,15 @@ public class App {
     public static final String GREEN = "\033[1;92m";
     public static final String RESET = "\033[0m" ;
 
-    private String greetingMessage = "Welcome to the library";
-    private String options = "Options:\n" +
+    private String greetingMessage = "\nWelcome to the library!";
+    private String options = "\nOptions:\n" +
             "1. Show book list\n" +
             "2. Show one book by Id\n" +
             "3. Add one book\n" +
             "4. Delete one book\n" +
             "5. Modify one book\n" +
-            "6. Exit options menu\n" +
-            "Select one number (eg 1): ";
+            "6. Exit application\n" +
+            "\nSelect one number (eg 1): ";
 
     private BookRepository bookRepository;
     private BookController bookController;

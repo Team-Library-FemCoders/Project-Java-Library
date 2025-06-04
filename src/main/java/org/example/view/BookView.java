@@ -52,25 +52,23 @@ public class BookView {
     private Book generateBook() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Rellena la información del libro: ");
-        System.out.print("Título: ");
+        System.out.println("Enter the book details:");
+        System.out.print("Title: ");
         String title = scanner.nextLine();
 
-        System.out.print("Autoría: ");
+        System.out.print("Author: ");
         String author = scanner.nextLine();
 
-        System.out.print("Sinopsis: ");
+        System.out.print("Summary: ");
         String summary = scanner.nextLine();
 
-        System.out.print("Género literario: ");
+        System.out.print("Genre: ");
         String genre = scanner.nextLine();
 
         System.out.print("ISBN: ");
         String isbn = scanner.nextLine();
 
         Book book = new Book(title, author, summary, genre, isbn);
-
-        //scanner.close();
 
         return book;
     }
@@ -88,7 +86,6 @@ public class BookView {
         try {
             while (true) {
                 System.out.println("You are going to delete a book.");
-
                 int id = this.askBookId(scanner);
 
                 if (id == 0) {
@@ -97,7 +94,6 @@ public class BookView {
 
                 Book book = bookController.selectOneBookByIdController(id);
                 System.out.printf(this.leftAlignment, RED, book.getId(), book.getTitle(), book.getAuthor(),book.getGenre(),book.getIsbn());
-
                 System.out.println(RESET + "Do you really want to delete this book (id: " + id + ")? (Y/N/Exit)");
                 Character answer = Character.toUpperCase(scanner.next().charAt(0));
                 scanner.nextLine();
@@ -109,7 +105,7 @@ public class BookView {
                     break;
                 }
             }
-        } catch (Exception exception){
+        } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
     }
@@ -118,7 +114,7 @@ public class BookView {
     private Book updateBookInstance(Book book) {
         Scanner scanner = new Scanner(System.in);
         String oldTitle = book.getTitle();
-        String newTitle = this.askAttributeToUpdate(oldTitle,100, "title", scanner);
+        String newTitle = this.askAttributeToUpdate(oldTitle,100, "Title", scanner);
         book.setTitle(newTitle);
 
         String oldAuthor = book.getAuthor();
@@ -154,7 +150,6 @@ public class BookView {
         for (Book book : bookList) {
             idList.add(book.getId());
         }
-
         return idList;
     }
 
@@ -179,7 +174,6 @@ public class BookView {
                 } else {
                     System.out.println("Id not found. Please enter a valid id.");
                 }
-
             } catch (InputMismatchException exception) {
                 System.out.println("Invalid input. Please enter a whole number");
                 scanner.nextLine();
@@ -193,6 +187,7 @@ public class BookView {
             System.out.printf("Current %s: %s %n", attributeName, formerValue);
             System.out.printf("New %s (Leave empty for no change)(Max %s characters): %n", attributeName, maxLength);
             String input = scanner.nextLine().trim();
+
             if (input.isEmpty()) {
                 return formerValue;
             } else {
