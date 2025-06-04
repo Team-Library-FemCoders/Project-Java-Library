@@ -40,7 +40,7 @@ public class BookView {
 
     public void showOneBookView() {
         Book book = this.getOneBookById();
-        System.out.printf(CYAN, "Id: %s%n" +
+        System.out.printf("Id: %s%n" +
                 "Title: %s%n" +
                 "Author: %s%n" +
                 "Summary: %s%n" +
@@ -52,7 +52,7 @@ public class BookView {
     private Book generateBook() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter the book details:");
+        System.out.println("Enter the book detail");
         System.out.print("Title: ");
         String title = scanner.nextLine();
 
