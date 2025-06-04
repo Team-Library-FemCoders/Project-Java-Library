@@ -23,7 +23,7 @@ public class BookRepository {
             ResultSet response = statement.executeQuery();
 
             while(response.next()) {
-                int id = response.getInt("id_book");
+                int id = response.getInt("id");
                 String title = response.getString("title");
                 String author = response.getString("author");
                 String summary = response.getString("summary");
@@ -43,7 +43,7 @@ public class BookRepository {
 
     public Book selectOneBookById(int id) {
         Book book = new Book();
-        String querySQLSelectALl = "SELECT * FROM books WHERE id_book = ?";
+        String querySQLSelectALl = "SELECT * FROM books WHERE id = ?";
 
         try {
             connection = DBManager.initConnection();
@@ -52,7 +52,7 @@ public class BookRepository {
             ResultSet response = statement.executeQuery();
 
             while(response.next()) {
-                int idNew = response.getInt("id_book");
+                int idNew = response.getInt("id");
                 String title = response.getString("title");
                 String author = response.getString("author");
                 String summary = response.getString("summary");
@@ -94,7 +94,7 @@ public class BookRepository {
     }
 
     public void deleteBook(int id) {
-        String querySQLDelete = "DELETE FROM books WHERE id_book = ?";
+        String querySQLDelete = "DELETE FROM books WHERE id = ?";
 
         try {
             connection = DBManager.initConnection();
