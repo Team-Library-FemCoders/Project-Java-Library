@@ -7,11 +7,6 @@ import org.example.view.BookView;
 import java.util.Scanner;
 
 public class App {
-    public static final String CYAN = "\033[1;96m";
-    public static final String RED = "\033[1;91m";
-    public static final String GREEN = "\033[1;92m";
-    public static final String RESET = "\033[0m" ;
-
     private String greetingMessage = "\nWelcome to the library!";
     private String options = "\nOptions:\n" +
             "1. Show book list\n" +

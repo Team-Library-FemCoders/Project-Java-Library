@@ -75,7 +75,7 @@ public class BookView {
     public void createAndSaveBookView() {
         Book book = generateBook();
         bookController.saveBookController(book);
-        System.out.println(GREEN + "Book saved");
+        System.out.println(GREEN + "Book saved" + RESET);
     }
 
     //Delete
