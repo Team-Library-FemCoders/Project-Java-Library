@@ -5,12 +5,11 @@ public class Book {
     private String author;
     private String summary;
     private String genre;
+    private String isbn;
+    private int id;
 
     public Book() {
     }
-
-    private String isbn;
-    private int id;
 
     public Book(String title, String author, String summary, String genre, String isbn, int id) {
         this.title = title;

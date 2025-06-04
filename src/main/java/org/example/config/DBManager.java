@@ -24,7 +24,7 @@ public class DBManager {
 
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("Successful connection");
+            System.out.println("\nSuccessful connection");
         } catch (SQLException exception) {
             System.out.println("Connection error: " + exception.getMessage());
         }
@@ -36,12 +36,10 @@ public class DBManager {
         try {
             if (connection != null && !connection.isClosed()) {
                 connection.close();
-                System.out.println("Connection correctly closed");
+                System.out.println("Connection correctly closed\n");
             }
         } catch (SQLException exception) {
             System.out.println("Closing connection error: " + exception.getMessage());
         }
     }
-
-
 }
