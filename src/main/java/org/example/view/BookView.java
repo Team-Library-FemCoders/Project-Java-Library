@@ -52,7 +52,7 @@ public class BookView {
     private Book generateBook() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter the book details:");
+        System.out.println("Enter the book detail");
         System.out.print("Title: ");
         String title = scanner.nextLine();
 
