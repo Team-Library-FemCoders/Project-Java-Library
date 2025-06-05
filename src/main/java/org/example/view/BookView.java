@@ -12,7 +12,6 @@ public class BookView {
 
     private final BookController bookController;
     public static final String BLUE_WHITE_BG = "\033[1;34;107m";
-    public static final String CYAN = "\033[1;96m";
     public static final String RED = "\033[1;91m";
     public static final String GREEN = "\033[1;92m";
     public static final String RESET = "\033[0m" ;
@@ -76,7 +75,7 @@ public class BookView {
     public void createAndSaveBookView() {
         Book book = generateBook();
         bookController.saveBookController(book);
-        System.out.println(GREEN + "Book saved");
+        System.out.println(GREEN + "Book saved" + RESET);
     }
 
     //Delete

@@ -71,8 +71,4 @@ public class Book {
     public int getId() {
         return id;
     }
-
-    public String describeBook() {
-        return  title + "\t" + author + "\t" + genre + "\t" + isbn + "\t" + id;
-    }
 }
