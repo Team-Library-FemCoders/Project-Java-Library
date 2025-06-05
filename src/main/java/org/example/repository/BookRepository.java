@@ -114,7 +114,7 @@ public class BookRepository {
     }
 
     public void updateBook (Book book){
-        String querySQLUpdate = "UPDATE books SET title = ?, author = ?, summary = ?, genre = ?, isbn = ?";
+        String querySQLUpdate = "UPDATE books SET title = ?, author = ?, summary = ?, genre = ?, isbn = ? WHERE id = ?";
 
         try {
             connection = DBManager.initConnection();
@@ -125,8 +125,9 @@ public class BookRepository {
             statement.setString(3, book.getSummary());
             statement.setString(4, book.getGenre());
             statement.setString(5, book.getIsbn());
+            statement.setInt(6, book.getId());
 
-            statement.execute();
+            statement.executeUpdate();
 
             System.out.println("Book updated");
 
